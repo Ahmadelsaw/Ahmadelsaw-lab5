@@ -6,6 +6,7 @@ public class Enigma{
         "#NWDKHGXZVRIFJBLMAOPSCYUTQE",
         "#TGOWHLIFMCSZYRVXQABUPEJKND"};
 
+    private static final String ALPHA = "#ABCDEFGHIJKLMNOPQRSTUVWXYZ"; // fixed inner ring
 
     private Rotor rotors[];
         
@@ -20,7 +21,7 @@ public class Enigma{
 
 
     public String decrypt(String message){        
-        //TODO
+        
     }
 
 
