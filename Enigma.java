@@ -44,7 +44,24 @@ public class Enigma{
 
     
     public String encrypt(String message){
+        StringBuilder out = new StringBuilder();
+        for(int k = 0; k < message.length(); k++){
+            char c = message.charAt(k);
+            if (c == '#') {
+                out.append('#');
+            } else {
+                int i0 = ALPHA.indexOf(c);
+                char m1= rotors[0].charAt(i0);
+                int i1 = ALPHA.indexOf(m1);
+                char m2= rotors[1].charAt(i1);
+                int i2 = ALPHA.indexOf(m2);
+                char outChar = rotors[2].charAt(i2);
+                out.append(outChar);
+            }
+            rotate();
+        }
 
+            return out.toString();
     }
 
     
