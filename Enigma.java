@@ -21,13 +21,30 @@ public class Enigma{
 
 
     public String decrypt(String message){        
-        
-    }
+        StringBuilder out = new StringBuilder();
+        for(int k = 0; k < message.length(); k++){
+            char c = message.charAt(k);
+            if (c == '#') {
+                out.append('#');
+            } else {
+                int j2 = rotors[2].indexOf(c);
+                char m2= ALPHA.charAt(j2);
+                int j1 = rotors[1].indexOf(c);
+                char m1= ALPHA.charAt(j1);
+                int j0 = rotors[0].indexOf(m1);
+                char outChar = ALPHA.charAt(j0);
+                out.append(outChar);
+            }
+            rotate();
+        }
+
+            return out.toString();
+        }
 
 
     
     public String encrypt(String message){
-        //TODO
+
     }
 
     
