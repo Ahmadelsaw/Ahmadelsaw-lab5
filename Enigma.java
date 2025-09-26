@@ -13,9 +13,9 @@ public class Enigma{
     public Enigma(int id1, int id2, int id3, String start){
 
         rotors = new Rotor[3];
-        rotors[0] = new Rotor(rotorInit[id1-1], start.charAt(0));
+        rotors[0] = new Rotor(rotorInit[id3-1], start.charAt(0));
         rotors[1] = new Rotor(rotorInit[id2-1], start.charAt(1));
-        rotors[2] = new Rotor(rotorInit[id3-1], start.charAt(2));
+        rotors[2] = new Rotor(rotorInit[id1-1], start.charAt(2));
         
     }
 
@@ -24,7 +24,6 @@ public class Enigma{
         StringBuilder out = new StringBuilder();
         for(int k = 0; k < message.length(); k++){
             char c = message.charAt(k);
-            rotate(); // rotate rotors first
             if (c == '#') {
                 out.append('#');
             } else {
@@ -36,6 +35,7 @@ public class Enigma{
                 char outChar = ALPHA.charAt(j0);// get final char
                 out.append(outChar);// append to output
             }
+            rotate(); // rotate rotors after each letter
         }
 
             return out.toString();
@@ -47,7 +47,6 @@ public class Enigma{
         StringBuilder out = new StringBuilder();
         for(int k = 0; k < message.length(); k++){
             char c = message.charAt(k);
-            rotate(); // rotate rotors first
             if (c == '#') {
                 out.append('#');// keep spaces as is
             } else {
@@ -59,6 +58,7 @@ public class Enigma{
                 char outChar = rotors[2].charAt(i2);
                 out.append(outChar);
             }
+            rotate(); // rotate rotors first
         }
 
             return out.toString();
@@ -66,9 +66,9 @@ public class Enigma{
 
     
 private void rotate(){
-    if (rotors[2].rotate()) {      // step RIGHT rotor every letter
+    if (rotors[0].rotate()) {      // step RIGHT rotor every lette
         if (rotors[1].rotate()) {  // carry to MIDDLE if right says true
-            rotors[0].rotate();    // carry to LEFT if middle says true
+            rotors[2].rotate();    // carry to LEFT if middle says true
         }
     }
 }
