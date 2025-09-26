@@ -13,17 +13,20 @@ public class Rotor {
     }
     
     public boolean rotate(){
-        //TODO
+        char last= rotorValues.charAt(rotorValues.length()-1); // get last char
+        String rest= rotorValues.substring(0, rotorValues.length() -1); // get all but last char
+        rotorValues = last + rest; //combine 
+        return rotorValues.charAt(0) == startChar; // check if at start char
                
     }
     
 
     public int indexOf(char c){
-        //TODO
+        return rotorValues.indexOf(c); // return index of char
     }
 
     public char charAt(int idx){
-        //TODO
+        return rotorValues.charAt(idx); // return char at index
     }
 }
     
