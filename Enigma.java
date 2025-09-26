@@ -24,18 +24,18 @@ public class Enigma{
         StringBuilder out = new StringBuilder();
         for(int k = 0; k < message.length(); k++){
             char c = message.charAt(k);
+            rotate(); // rotate rotors first
             if (c == '#') {
                 out.append('#');
             } else {
-                int j2 = rotors[2].indexOf(c);
-                char m2= ALPHA.charAt(j2);
-                int j1 = rotors[1].indexOf(c);
+                int j2 = rotors[2].indexOf(c);// map back through inner rotor
+                char m2= ALPHA.charAt(j2);// map back through outer rotor
+                int j1 = rotors[1].indexOf(m2);
                 char m1= ALPHA.charAt(j1);
                 int j0 = rotors[0].indexOf(m1);
-                char outChar = ALPHA.charAt(j0);
-                out.append(outChar);
+                char outChar = ALPHA.charAt(j0);// get final char
+                out.append(outChar);// append to output
             }
-            rotate();
         }
 
             return out.toString();
@@ -47,8 +47,9 @@ public class Enigma{
         StringBuilder out = new StringBuilder();
         for(int k = 0; k < message.length(); k++){
             char c = message.charAt(k);
+            rotate(); // rotate rotors first
             if (c == '#') {
-                out.append('#');
+                out.append('#');// keep spaces as is
             } else {
                 int i0 = ALPHA.indexOf(c);
                 char m1= rotors[0].charAt(i0);
@@ -58,19 +59,18 @@ public class Enigma{
                 char outChar = rotors[2].charAt(i2);
                 out.append(outChar);
             }
-            rotate();
         }
 
             return out.toString();
     }
 
     
-    private void rotate(){
-        if(rotors[0].rotate()){
-            if(rotors[1].rotate()){
-                rotors[2].rotate();
-            }
+private void rotate(){
+    if (rotors[2].rotate()) {      // step RIGHT rotor every letter
+        if (rotors[1].rotate()) {  // carry to MIDDLE if right says true
+            rotors[0].rotate();    // carry to LEFT if middle says true
         }
     }
+}
     
 }
